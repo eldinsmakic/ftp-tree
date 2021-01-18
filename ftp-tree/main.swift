@@ -71,29 +71,6 @@ extension NWConnection {
 
 
 @available(OSX 10.14, *)
-class Pass: Command {
-    let password: String
-    init(nwConnection: NWConnection, password: String) {
-        self.password = password
-
-        super.init(nwConnection: nwConnection)
-        self.validResponse = 230
-        self.commandName = "PASS"
-
-    }
-
-    override func launch() throws -> String? {
-        let request = "\(self.commandName) \(self.password)"
-        var data = request.data(using: .utf8)!
-        data.append(contentsOf: [13,10])
-        self.send(data: data)
-        self.setupReceive()
-        return try super.launch()
-    }
-}
-
-
-@available(OSX 10.14, *)
 class Connection: Command {
     override init(nwConnection: NWConnection) {
         super.init(nwConnection: nwConnection)
