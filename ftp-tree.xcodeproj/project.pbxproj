@@ -39,6 +39,7 @@
 		9978749025B60E6C000004D3 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		9978749325B60EB5000004D3 /* Passive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Passive.swift; sourceTree = "<group>"; };
 		9978749625B60EEF000004D3 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
+		9978749925B60F43000004D3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +56,7 @@
 		9953251225B60A59009E6BC5 = {
 			isa = PBXGroup;
 			children = (
+				9978749925B60F43000004D3 /* README.md */,
 				9953251D25B60A59009E6BC5 /* ftp-tree */,
 				9953251C25B60A59009E6BC5 /* Products */,
 			);
