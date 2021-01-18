@@ -192,11 +192,6 @@ class ClientConnection {
     }
 }
 
-
-if #available(OSX 10.14, *) {
-    let client = Client(host: "test.rebex.net", port: 21)
-    client.start()
-    dispatchMain()
-} else {
-    print("hh")
-}
+let client = Client(host: "test.rebex.net", port: 21)
+client.start()
+dispatchMain()
