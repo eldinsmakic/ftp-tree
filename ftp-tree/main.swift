@@ -70,19 +70,7 @@ extension NWConnection {
 }
 
 
-@available(OSX 10.14, *)
-class Connection: Command {
-    override init(nwConnection: NWConnection) {
-        super.init(nwConnection: nwConnection)
-        self.validResponse = 220
-    }
 
-    override func launch() throws -> String? {
-        self.start()
-        self.setupReceive()
-        return try super.launch()
-    }
-}
 
 @available(OSX 10.14, *)
 class Passive: Command {
