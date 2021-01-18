@@ -70,30 +70,6 @@ extension NWConnection {
 }
 
 
-
-
-@available(OSX 10.14, *)
-class Passive: Command {
-    override init(nwConnection: NWConnection) {
-        super.init(nwConnection: nwConnection)
-        self.validResponse = 227
-        self.commandName = "PASV"
-    }
-
-    override func launch() throws -> String? {
-        let request = "\(self.commandName)"
-        var data = request.data(using: .utf8)!
-        data.append(contentsOf: [13,10])
-        self.send(data: data)
-        self.setupReceive()
-        return try super.launch()
-    }
-
-    override func returnResultCommand(message: String) {
-        result = message
-    }
-}
-
 @available(OSX 10.14, *)
 class List: Command {
     override init(nwConnection: NWConnection) {
