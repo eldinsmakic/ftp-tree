@@ -9,12 +9,17 @@
 /* Begin PBXBuildFile section */
 		9953251F25B60A5A009E6BC5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9953251E25B60A5A009E6BC5 /* main.swift */; };
 		9953252725B60A7A009E6BC5 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9953252625B60A7A009E6BC5 /* Client.swift */; };
+		9964574F25B8BA8500ECAD15 /* CD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9964574E25B8BA8500ECAD15 /* CD.swift */; };
+		99672E1825B8C1380091D62C /* ftp_tree_test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99672E1725B8C1380091D62C /* ftp_tree_test.swift */; };
+		99672E2025B8C1840091D62C /* ListResutFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99672E1F25B8C1840091D62C /* ListResutFormatterTests.swift */; };
+		99672E2F25B8C3E40091D62C /* ListResultFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99672E2A25B8C3640091D62C /* ListResultFormatter.swift */; };
 		9978748825B60D51000004D3 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9978748725B60D51000004D3 /* Command.swift */; };
 		9978748B25B60DD0000004D3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9978748A25B60DD0000004D3 /* User.swift */; };
 		9978748E25B60E41000004D3 /* Pass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9978748D25B60E41000004D3 /* Pass.swift */; };
 		9978749125B60E6C000004D3 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9978749025B60E6C000004D3 /* Connection.swift */; };
 		9978749425B60EB5000004D3 /* Passive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9978749325B60EB5000004D3 /* Passive.swift */; };
 		9978749725B60EEF000004D3 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9978749625B60EEF000004D3 /* List.swift */; };
+		99CB319025B8C56B00C06C2C /* ListResultFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99672E2A25B8C3640091D62C /* ListResultFormatter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,6 +38,12 @@
 		9953251B25B60A59009E6BC5 /* ftp-tree */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "ftp-tree"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9953251E25B60A5A009E6BC5 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		9953252625B60A7A009E6BC5 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		9964574E25B8BA8500ECAD15 /* CD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CD.swift; sourceTree = "<group>"; };
+		99672E1525B8C1380091D62C /* ftp-tree-test.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ftp-tree-test.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		99672E1725B8C1380091D62C /* ftp_tree_test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ftp_tree_test.swift; sourceTree = "<group>"; };
+		99672E1925B8C1380091D62C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		99672E1F25B8C1840091D62C /* ListResutFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListResutFormatterTests.swift; sourceTree = "<group>"; };
+		99672E2A25B8C3640091D62C /* ListResultFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListResultFormatter.swift; sourceTree = "<group>"; };
 		9978748725B60D51000004D3 /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		9978748A25B60DD0000004D3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9978748D25B60E41000004D3 /* Pass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pass.swift; sourceTree = "<group>"; };
@@ -50,6 +61,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		99672E1225B8C1380091D62C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -58,6 +76,7 @@
 			children = (
 				9978749925B60F43000004D3 /* README.md */,
 				9953251D25B60A59009E6BC5 /* ftp-tree */,
+				99672E1625B8C1380091D62C /* ftp-tree-test */,
 				9953251C25B60A59009E6BC5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -66,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				9953251B25B60A59009E6BC5 /* ftp-tree */,
+				99672E1525B8C1380091D62C /* ftp-tree-test.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -73,11 +93,30 @@
 		9953251D25B60A59009E6BC5 /* ftp-tree */ = {
 			isa = PBXGroup;
 			children = (
+				99672E2925B8C35A0091D62C /* Formatter */,
 				9978748625B60D42000004D3 /* Commands */,
 				9953251E25B60A5A009E6BC5 /* main.swift */,
 				9953252625B60A7A009E6BC5 /* Client.swift */,
 			);
 			path = "ftp-tree";
+			sourceTree = "<group>";
+		};
+		99672E1625B8C1380091D62C /* ftp-tree-test */ = {
+			isa = PBXGroup;
+			children = (
+				99672E1725B8C1380091D62C /* ftp_tree_test.swift */,
+				99672E1925B8C1380091D62C /* Info.plist */,
+				99672E1F25B8C1840091D62C /* ListResutFormatterTests.swift */,
+			);
+			path = "ftp-tree-test";
+			sourceTree = "<group>";
+		};
+		99672E2925B8C35A0091D62C /* Formatter */ = {
+			isa = PBXGroup;
+			children = (
+				99672E2A25B8C3640091D62C /* ListResultFormatter.swift */,
+			);
+			path = Formatter;
 			sourceTree = "<group>";
 		};
 		9978748625B60D42000004D3 /* Commands */ = {
@@ -89,6 +128,7 @@
 				9978749025B60E6C000004D3 /* Connection.swift */,
 				9978749325B60EB5000004D3 /* Passive.swift */,
 				9978749625B60EEF000004D3 /* List.swift */,
+				9964574E25B8BA8500ECAD15 /* CD.swift */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -113,6 +153,23 @@
 			productReference = 9953251B25B60A59009E6BC5 /* ftp-tree */;
 			productType = "com.apple.product-type.tool";
 		};
+		99672E1425B8C1380091D62C /* ftp-tree-test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 99672E1C25B8C1380091D62C /* Build configuration list for PBXNativeTarget "ftp-tree-test" */;
+			buildPhases = (
+				99672E1125B8C1380091D62C /* Sources */,
+				99672E1225B8C1380091D62C /* Frameworks */,
+				99672E1325B8C1380091D62C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ftp-tree-test";
+			productName = "ftp-tree-test";
+			productReference = 99672E1525B8C1380091D62C /* ftp-tree-test.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -123,6 +180,9 @@
 				LastUpgradeCheck = 1220;
 				TargetAttributes = {
 					9953251A25B60A59009E6BC5 = {
+						CreatedOnToolsVersion = 12.2;
+					};
+					99672E1425B8C1380091D62C = {
 						CreatedOnToolsVersion = 12.2;
 					};
 				};
@@ -141,9 +201,20 @@
 			projectRoot = "";
 			targets = (
 				9953251A25B60A59009E6BC5 /* ftp-tree */,
+				99672E1425B8C1380091D62C /* ftp-tree-test */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		99672E1325B8C1380091D62C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9953251725B60A59009E6BC5 /* Sources */ = {
@@ -152,12 +223,24 @@
 			files = (
 				9978748B25B60DD0000004D3 /* User.swift in Sources */,
 				9978749725B60EEF000004D3 /* List.swift in Sources */,
+				9964574F25B8BA8500ECAD15 /* CD.swift in Sources */,
 				9978749125B60E6C000004D3 /* Connection.swift in Sources */,
 				9953252725B60A7A009E6BC5 /* Client.swift in Sources */,
 				9953251F25B60A5A009E6BC5 /* main.swift in Sources */,
 				9978748E25B60E41000004D3 /* Pass.swift in Sources */,
+				99672E2F25B8C3E40091D62C /* ListResultFormatter.swift in Sources */,
 				9978749425B60EB5000004D3 /* Passive.swift in Sources */,
 				9978748825B60D51000004D3 /* Command.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		99672E1125B8C1380091D62C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				99672E2025B8C1840091D62C /* ListResutFormatterTests.swift in Sources */,
+				99CB319025B8C56B00C06C2C /* ListResultFormatter.swift in Sources */,
+				99672E1825B8C1380091D62C /* ftp_tree_test.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +384,42 @@
 			};
 			name = Release;
 		};
+		99672E1A25B8C1380091D62C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = PL39FQM22S;
+				INFOPLIST_FILE = "ftp-tree-test/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.smakic.eldin.ftp-tree-test";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		99672E1B25B8C1380091D62C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = PL39FQM22S;
+				INFOPLIST_FILE = "ftp-tree-test/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.smakic.eldin.ftp-tree-test";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -318,6 +437,15 @@
 			buildConfigurations = (
 				9953252325B60A5A009E6BC5 /* Debug */,
 				9953252425B60A5A009E6BC5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		99672E1C25B8C1380091D62C /* Build configuration list for PBXNativeTarget "ftp-tree-test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				99672E1A25B8C1380091D62C /* Debug */,
+				99672E1B25B8C1380091D62C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
