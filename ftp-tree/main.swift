@@ -81,6 +81,7 @@ class ClientConnection {
     var dataFlowNwConnection: NWConnection?
     let queue = DispatchQueue(label: "Client connection Q")
     let resultFormatter = ListResultFormatter()
+    var spacing = 0
 
     init(nwConnection: NWConnection) {
         self.nwConnection = nwConnection
@@ -128,14 +129,18 @@ class ClientConnection {
 
         let contentCWD = self.resultFormatter.mapMessageToTree(message: message!)
 
-        let dir = contentCWD[0][1]
+        contentCWD.forEach { file in
+            print("\(String(repeating: " ", count: self.spacing))|__ \(file[1])")
 
-        _ = self.nwConnection.lauchMethod(command: .Cd(dir))
+            if file[0] == "<DIR>" {
+                self.spacing += 4
+                _ = self.nwConnection.lauchMethod(command: .Cd(file[1]))
+                self.dataFlowNwConnection?.cancel()
+                listTree()
+            }
+        }
 
-
-        self.dataFlowNwConnection?.cancel()
-
-        listTree()
+        _ = self.nwConnection.lauchMethod(command: .Cd(".."))
     }
 
 
@@ -151,7 +156,7 @@ class ClientConnection {
         let arrayAddress = result.split(separator: ",")
         let ip = arrayAddress[...3].joined(separator: ".")
         let port = Int(arrayAddress[4])! * 256 + Int(arrayAddress[5])!
-        print("hello \(ip) and \(port)")
+//        print("hello \(ip) and \(port)")
 
         let nwConnection = NWConnection(host: .init(ip), port: .init(integerLiteral: .init(port)), using: .tcp)
         return nwConnection
@@ -176,7 +181,7 @@ class ClientConnection {
                 self.connectionDidFail(error: error)
                 return
             }
-                print("connection did send, data: \(data as NSData)")
+//                print("connection did send, data: \(data as NSData)")
         }))
     }
 
@@ -189,7 +194,7 @@ class ClientConnection {
             } else {
                 if let data = data, !data.isEmpty {
                     let message = String(data: data, encoding: .utf8)
-                    print("connection did receive, data: \(data as NSData) string: \(message ?? "-" )")
+//                    print("connection did receive, data: \(data as NSData) string: \(message ?? "-" )")
                     let contentCWD = self.resultFormatter.mapMessageToTree(message: message!)
                     
                     let dir = contentCWD[0][1]
