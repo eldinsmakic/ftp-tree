@@ -22,8 +22,30 @@ public class ListResultFormatter {
             }
         }
 
+        if lastIndex == 0 {
+            lastIndex = arrayMessage.count
+        }
+
         let result = arrayMessage[0..<lastIndex]
 
         return String(result)
+    }
+
+    public func mapMessageToTree(message: String) -> [[String]] {
+        let array = message.split(separator: "\r\n")
+        var result = [[String]]()
+
+        array.forEach { element in
+            let arrayElement = element.split(separator: " ")
+            let length = arrayElement.count
+            result.append(
+                [
+                    String(arrayElement[length - 2]),
+                    trimMessage(message: String(arrayElement[length - 1]))
+                ]
+            )
+        }
+
+        return result
     }
 }

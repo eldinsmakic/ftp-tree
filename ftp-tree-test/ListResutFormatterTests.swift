@@ -17,4 +17,13 @@ class ListResutFormatterTest: XCTestCase {
 
         XCTAssertEqual(listResultFormatter.trimMessage(message: "readme.txt\r\n"), "readme.txt")
     }
+
+    func testMapToTree() {
+        let listResultFormatter = ListResultFormatter()
+        let message = """
+              10-19-20  03:19PM       <DIR>          pub\r\n04-08-14  03:09PM                  403 readme.txt\r\n
+        """
+
+        XCTAssertEqual(listResultFormatter.mapMessageToTree(message: message ), [["<DIR>","pub"],["403","readme.txt"]])
+    }
 }
