@@ -42,6 +42,7 @@ extension NWConnection {
         case Pass
         case Passive
         case List
+        case Cd(String)
     }
 
     func lauchMethod(command: CommandType) -> String? {
@@ -60,7 +61,9 @@ extension NWConnection {
                 let cmd = Passive(nwConnection: self)
                 return try cmd.launch()
             case .List:
-                return try List(nwConnection: self).launch()
+                try List(nwConnection: self).launch()
+            case .Cd(let directory):
+                return try CD(nwConnection: self, directory: directory).launch()
             }
         } catch let error {
             print(error)
@@ -77,6 +80,7 @@ class ClientConnection {
     let nwConnection: NWConnection
     var dataFlowNwConnection: NWConnection?
     let queue = DispatchQueue(label: "Client connection Q")
+    let resultFormatter = ListResultFormatter()
 
     init(nwConnection: NWConnection) {
         self.nwConnection = nwConnection
@@ -93,20 +97,47 @@ class ClientConnection {
         _ = nwConnection.lauchMethod(command: .Connect)
         _ = nwConnection.lauchMethod(command: .User)
         _ = nwConnection.lauchMethod(command: .Pass)
-        let response = nwConnection.lauchMethod(command: .Passive)
-        let newConnection = convertToConnection(message: response!)
-        self.dataFlowNwConnection = newConnection
-        self.dataFlowNwConnection?.start(queue: queue)
-        setupReceive()
-        _ = nwConnection.lauchMethod(command: .List)
+
+        listTree()
     }
 
-    private func mapMessageToTree(message: String) {
-        let array = message.split(separator: " ")
-        print(array)
-        print("\(array[2]) \(array[3])")
-        print("\(array[5]) \(array[6])")
+    private func listTree() {
+        let response = nwConnection.lauchMethod(command: .Passive)
+
+        let newConnection = convertToConnection(message: response!)
+
+        self.dataFlowNwConnection = newConnection
+        self.dataFlowNwConnection?.start (queue: queue)
+        var message: String? = nil
+
+        dataFlowNwConnection?.receive(minimumIncompleteLength: 1, maximumLength: 65536) { [self] (data, _, isComplete, error) in
+            if isComplete {
+                self.connectionDidEnd()
+            } else if let error = error {
+                self.connectionDidFail(error: error)
+            } else {
+                message = String(data: data!, encoding: .utf8)
+            }
+        }
+
+        _ = nwConnection.lauchMethod(command: .List)
+
+        while(message == nil) {
+            sleep(1)
+        }
+
+        let contentCWD = self.resultFormatter.mapMessageToTree(message: message!)
+
+        let dir = contentCWD[0][1]
+
+        _ = self.nwConnection.lauchMethod(command: .Cd(dir))
+
+
+        self.dataFlowNwConnection?.cancel()
+
+        listTree()
     }
+
 
     private func convertToConnection(message: String) -> NWConnection {
         let range = NSRange(location: 0, length: message.count)
@@ -150,7 +181,7 @@ class ClientConnection {
     }
 
     func setupReceive() {
-        dataFlowNwConnection?.receive(minimumIncompleteLength: 1, maximumLength: 65536) { (data, _, isComplete, error) in
+        dataFlowNwConnection?.receive(minimumIncompleteLength: 1, maximumLength: 65536) { [self] (data, _, isComplete, error) in
             if isComplete {
                 self.connectionDidEnd()
             } else if let error = error {
@@ -159,8 +190,23 @@ class ClientConnection {
                 if let data = data, !data.isEmpty {
                     let message = String(data: data, encoding: .utf8)
                     print("connection did receive, data: \(data as NSData) string: \(message ?? "-" )")
-                    self.mapMessageToTree(message: message!)
-                    self.setupReceive()
+                    let contentCWD = self.resultFormatter.mapMessageToTree(message: message!)
+                    
+                    let dir = contentCWD[0][1]
+
+                    _ = self.nwConnection.lauchMethod(command: .Cd(dir))
+
+                    let response = self.nwConnection.lauchMethod(command: .Passive)
+
+                    let newConnection = self.convertToConnection(message: response!)
+
+                    self.dataFlowNwConnection?.cancel()
+
+                    self.dataFlowNwConnection = newConnection
+                    self.dataFlowNwConnection?.start(queue: queue)
+                    setupReceive()
+
+                    _ = self.nwConnection.lauchMethod(command: .List)
                 }
             }
         }
