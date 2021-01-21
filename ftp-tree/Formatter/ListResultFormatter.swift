@@ -12,16 +12,17 @@ public class ListResultFormatter {
     public init() {}
 
     public func trimMessage(message: String) -> String {
-        let range = NSRange(location: 0, length: message.count)
-        let regex = try! NSRegularExpression(pattern: "^.*\\r\\n")
+        var lastIndex = 0
+        let arrayMessage = Array(message)
 
-        let messageTrimmed = regex.firstMatch(in: message, options: [], range: range)
+        for index in 0..<arrayMessage.count {
+            if arrayMessage[index] == "\r\n" {
+                lastIndex = index
+                break
+            }
+        }
 
-        let subRange = Range(messageTrimmed!.range, in: message)
-
-        var result = message[subRange!]
-
-        result.removeLast()
+        let result = arrayMessage[0..<lastIndex]
 
         return String(result)
     }

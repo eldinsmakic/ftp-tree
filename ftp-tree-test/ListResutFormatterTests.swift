@@ -11,9 +11,10 @@ import XCTest
 class ListResutFormatterTest: XCTestCase {
 
     func testTrim() {
-        let message = "pub\r\n04-08-14"
         let listResultFormatter = ListResultFormatter()
-        XCTAssertEqual(listResultFormatter.trimMessage(message: message), "pub")
-    }
 
+        XCTAssertEqual(listResultFormatter.trimMessage(message: "pub\r\n04-08-14"), "pub")
+
+        XCTAssertEqual(listResultFormatter.trimMessage(message: "readme.txt\r\n"), "readme.txt")
+    }
 }
