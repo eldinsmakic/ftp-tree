@@ -9,6 +9,7 @@ import Foundation
 import Network
 
 class List: Command {
+
     override init(nwConnection: NWConnection) {
         super.init(nwConnection: nwConnection)
         self.validResponse = 150
@@ -21,10 +22,13 @@ class List: Command {
         data.append(contentsOf: [13,10])
         self.send(data: data)
         self.setupReceive()
-        return try super.launch()
+        let result = try super.launch()
+        self.setupReceive()
+        return result
     }
 
     override func returnResultCommand(message: String) {
         result = message
     }
+
 }
