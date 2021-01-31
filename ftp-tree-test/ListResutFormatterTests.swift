@@ -20,10 +20,17 @@ class ListResutFormatterTest: XCTestCase {
 
     func testMapToTree() {
         let listResultFormatter = ListResultFormatter()
-        let message = """
-              10-19-20  03:19PM       <DIR>          pub\r\n04-08-14  03:09PM                  403 readme.txt\r\n
-        """
 
-        XCTAssertEqual(listResultFormatter.mapMessageToTree(message: message ), [["<DIR>","pub"],["403","readme.txt"]])
+        let message = """
+            drwxr-xr-x   31 997      997          4096 Jan 31 20:47 cdimage\r\ndrwxr-xr-x   26 997      997          4096 Jan 31 21:14 cloud-images\r\ndrwxr-xr-x    8 997      997          4096 Jan 31 21:02 maas-images\r\ndrwxr-xr-x    5 997      997          4096 May 11  2010 old-images\r\n-rwxr-xr-x   13 997      997          4096 Jan 31 19:24 releases\r\n
+            """
+
+        XCTAssertEqual(listResultFormatter.mapMessageToTree(message: message), [
+                        ["d","cdimage"],
+                        ["d","cloud-images"],
+            ["d","maas-images"],
+            ["d","old-images"],
+            ["-","releases"]
+        ])
     }
 }

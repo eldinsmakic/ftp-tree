@@ -40,7 +40,7 @@ public class ListResultFormatter {
             let length = arrayElement.count
             result.append(
                 [
-                    String(arrayElement[length - 2]),
+                    String(arrayElement[0].first!),
                     trimMessage(message: String(arrayElement[length - 1]))
                 ]
             )
