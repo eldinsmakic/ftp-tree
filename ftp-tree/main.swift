@@ -38,8 +38,8 @@ extension NWConnection {
 
     enum CommandType {
         case Connect
-        case User
-        case Pass
+        case User(String)
+        case Pass(String)
         case Passive
         case List
         case Cd(String)
@@ -51,11 +51,11 @@ extension NWConnection {
             case .Connect:
                 let cmd  = Connection(nwConnection: self)
                 return try cmd.launch()
-            case .User:
-                let cmd = User(nwConnection: self, username: "demo")
+            case .User(let user):
+                let cmd = User(nwConnection: self, username: user)
                 return try cmd.launch()
-            case .Pass:
-                let cmd = Pass(nwConnection: self, password: "password")
+            case .Pass(let password):
+                let cmd = Pass(nwConnection: self, password: password)
                 return try cmd.launch()
             case .Passive:
                 let cmd = Passive(nwConnection: self)
@@ -76,7 +76,7 @@ extension NWConnection {
 
 @available(OSX 10.14, *)
 class ClientConnection {
-
+    var host = ""
     let nwConnection: NWConnection
     var dataFlowNwConnection: NWConnection?
     let queue = DispatchQueue(label: "Client connection Q")
@@ -92,17 +92,14 @@ class ClientConnection {
 
     func start() {
         print("connection will start")
+
         nwConnection.stateUpdateHandler = stateDidChange(to:)
 
         nwConnection.start(queue: queue)
-        _ = nwConnection.lauchMethod(command: .Connect)
-        _ = nwConnection.lauchMethod(command: .User)
-        _ = nwConnection.lauchMethod(command: .Pass)
-
-        listTree()
+        
     }
 
-    private func listTree() {
+    public func listTree() {
         let response = nwConnection.lauchMethod(command: .Passive)
 
         let newConnection = convertToConnection(message: response!)
@@ -132,14 +129,13 @@ class ClientConnection {
         contentCWD.forEach { file in
             print("\(String(repeating: " ", count: self.spacing))|__ \(file[1])")
 
-            if file[0] == "<DIR>" {
+            if file[0] == "d" {
                 self.spacing += 4
                 _ = self.nwConnection.lauchMethod(command: .Cd(file[1]))
                 self.dataFlowNwConnection?.cancel()
                 listTree()
             }
         }
-
         _ = self.nwConnection.lauchMethod(command: .Cd(".."))
     }
 
@@ -154,10 +150,10 @@ class ClientConnection {
         result.removeLast()
 
         let arrayAddress = result.split(separator: ",")
-        let ip = arrayAddress[...3].joined(separator: ".")
+        var ip = arrayAddress[...3].joined(separator: ".")
         let port = Int(arrayAddress[4])! * 256 + Int(arrayAddress[5])!
-//        print("hello \(ip) and \(port)")
 
+        ip = self.host
         let nwConnection = NWConnection(host: .init(ip), port: .init(integerLiteral: .init(port)), using: .tcp)
         return nwConnection
     }
@@ -194,7 +190,7 @@ class ClientConnection {
             } else {
                 if let data = data, !data.isEmpty {
                     let message = String(data: data, encoding: .utf8)
-//                    print("connection did receive, data: \(data as NSData) string: \(message ?? "-" )")
+                    print("connection did receive, data: \(data as NSData) string: \(message ?? "-" )")
                     let contentCWD = self.resultFormatter.mapMessageToTree(message: message!)
                     
                     let dir = contentCWD[0][1]
@@ -216,7 +212,6 @@ class ClientConnection {
             }
         }
     }
-
 
     func stop() {
         print("connection will stop")
@@ -243,6 +238,8 @@ class ClientConnection {
     }
 }
 
-let client = Client(host: "test.rebex.net", port: 21)
-client.start()
+let programFTP = ProgramTree()
+CommandLineParser(arguments: CommandLine.arguments, program: programFTP).lauchCommandLine()
+
+
 dispatchMain()

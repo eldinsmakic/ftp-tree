@@ -18,6 +18,7 @@ class Client {
         self.port = NWEndpoint.Port(rawValue: port)!
         let nwConnection = NWConnection(host: self.host, port: self.port, using: .tcp)
         connection = ClientConnection(nwConnection: nwConnection)
+        connection.host = host 
     }
 
     func start() {
