@@ -9,7 +9,7 @@ import Foundation
 import Network
 
 /**
- A Command is a FTP Command 
+ A Command is a FTP Command
  */
 class Command {
 
@@ -38,7 +38,7 @@ class Command {
 
     func verifyCommand(message: String) throws {
         if !message.contains("\(self.validResponse)") {
-            print("error on \(message)")
+//            print("error on \(message)")
         } else {
             returnResultCommand(message: message)
         }
