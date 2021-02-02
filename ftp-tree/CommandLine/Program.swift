@@ -19,7 +19,6 @@ final class ProgramTree: Program {
         client.connection.nwConnection.lauchMethod(command: .Pass("anonymous"))
 
         client.connection.listTree()
-
         return 0
     }
 }

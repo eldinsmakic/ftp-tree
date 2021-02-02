@@ -28,6 +28,7 @@ final class CommandLineParser {
     private func parse() {
         if arguments.count < 2 {
             print("Command invalid")
+            self.program.launch(host: "ftp.ubuntu.com", username: "anonymous", password: "anonymous")
         } else {
             for indice in 1..<arguments.count {
                 if arguments[indice] == "-h" {

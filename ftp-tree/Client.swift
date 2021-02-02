@@ -24,7 +24,6 @@ class Client {
     func start() {
         print("Client started \(host) \(port)")
         connection.didStopCallback = didStopCallback(error:)
-        connection.start()
     }
 
     func stop() {

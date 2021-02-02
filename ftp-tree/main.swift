@@ -61,7 +61,7 @@ extension NWConnection {
                 let cmd = Passive(nwConnection: self)
                 return try cmd.launch()
             case .List:
-                try List(nwConnection: self).launch()
+                return try List(nwConnection: self).launch()
             case .Cd(let directory):
                 return try CD(nwConnection: self, directory: directory).launch()
             }
@@ -82,6 +82,8 @@ class ClientConnection {
     let queue = DispatchQueue(label: "Client connection Q")
     let resultFormatter = ListResultFormatter()
     var spacing = 0
+    let deepthMax = 2
+    var deepth = -1
 
     init(nwConnection: NWConnection) {
         self.nwConnection = nwConnection
@@ -91,15 +93,21 @@ class ClientConnection {
     var didStopCallback: ((Error?) -> Void)? = nil
 
     func start() {
-        print("connection will start")
-
         nwConnection.stateUpdateHandler = stateDidChange(to:)
 
         nwConnection.start(queue: queue)
-        
     }
 
     public func listTree() {
+        print(deepth)
+        deepth += 1
+        if deepth >= deepthMax {
+            self.spacing -= 4
+            deepth -= 1
+            _ = self.nwConnection.lauchMethod(command: .Cd(".."))
+            return
+        }
+
         let response = nwConnection.lauchMethod(command: .Passive)
 
         let newConnection = convertToConnection(message: response!)
@@ -109,9 +117,8 @@ class ClientConnection {
         var message: String? = nil
 
         dataFlowNwConnection?.receive(minimumIncompleteLength: 1, maximumLength: 65536) { [self] (data, _, isComplete, error) in
-            if isComplete {
-                self.connectionDidEnd()
-            } else if let error = error {
+//            print(isComplete)
+            if let error = error {
                 self.connectionDidFail(error: error)
             } else {
                 message = String(data: data!, encoding: .utf8)
@@ -134,8 +141,14 @@ class ClientConnection {
                 _ = self.nwConnection.lauchMethod(command: .Cd(file[1]))
                 self.dataFlowNwConnection?.cancel()
                 listTree()
+                //                    print("HHHH count \(deepth)")
             }
+//            print("hhello")
         }
+//        print(contentCWD)
+        self.spacing -= 4
+//        print("Going back")
+        self.deepth -= 1
         _ = self.nwConnection.lauchMethod(command: .Cd(".."))
     }
 
@@ -239,7 +252,7 @@ class ClientConnection {
 }
 
 let programFTP = ProgramTree()
-CommandLineParser(arguments: CommandLine.arguments, program: programFTP).lauchCommandLine()
+let cmdParser = CommandLineParser(arguments: CommandLine.arguments, program: programFTP)
 
-
+cmdParser.lauchCommandLine()
 dispatchMain()
