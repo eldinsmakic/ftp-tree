@@ -7,6 +7,9 @@
 
 import Foundation
 
+/**
+ Get Input from Command Line and parse it for the program
+ */
 final class CommandLineParser {
     let arguments: [String]
     let program: Program
@@ -24,7 +27,6 @@ final class CommandLineParser {
 
     public func lauchCommandLine() {
         guard let host = host else { return }
-
         self.program.launch(host: host, username: self.username, password: self.password, deepth: self.deepth)
     }
 
