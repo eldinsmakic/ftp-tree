@@ -8,6 +8,9 @@
 import Foundation
 import Network
 
+/**
+ A Command is a FTP Command 
+ */
 class Command {
 
     var commandName: String = ""
@@ -35,7 +38,7 @@ class Command {
 
     func verifyCommand(message: String) throws {
         if !message.contains("\(self.validResponse)") {
-//            print("error on \(message)")
+            print("error on \(message)")
         } else {
             returnResultCommand(message: message)
         }
@@ -67,7 +70,6 @@ class Command {
                 self.connectionDidFail(error: error)
                 return
             }
-//                print("connection did send, data: \(data as NSData)")
         }))
     }
 
@@ -80,7 +82,6 @@ class Command {
             } else {
                 if let data = data, !data.isEmpty {
                     let message = String(data: data, encoding: .utf8)
-//                    print("connection did receive, data: \(data as NSData) string: \(message ?? "-" )")
                     do {
                         try self.verifyCommand(message: message!)
                     } catch let error {

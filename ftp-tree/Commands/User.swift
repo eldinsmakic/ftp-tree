@@ -8,6 +8,9 @@
 import Foundation
 import Network
 
+/**
+ User FTP Command, send Username
+ */
 class User: Command {
     let username: String
     init(nwConnection: NWConnection, username: String) {

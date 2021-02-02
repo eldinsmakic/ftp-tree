@@ -8,6 +8,7 @@
 import Foundation
 import Network
 
+/** Client create the connection with a endpoint */
 class Client {
     let connection: ClientConnection
     let host: NWEndpoint.Host

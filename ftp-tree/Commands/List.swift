@@ -8,6 +8,9 @@
 import Foundation
 import Network
 
+/**
+    Ls FTP Command
+ */
 class List: Command {
 
     override init(nwConnection: NWConnection) {

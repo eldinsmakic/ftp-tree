@@ -8,6 +8,9 @@
 import Foundation
 import Network
 
+/**
+  Connection, Create connection between two host
+ */
 class Connection: Command {
     override init(nwConnection: NWConnection) {
         super.init(nwConnection: nwConnection)

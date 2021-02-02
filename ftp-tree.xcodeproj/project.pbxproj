@@ -11,6 +11,7 @@
 		9953252725B60A7A009E6BC5 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9953252625B60A7A009E6BC5 /* Client.swift */; };
 		99543D5125C96F1F00AB5E64 /* ClientConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99543D5025C96F1F00AB5E64 /* ClientConnection.swift */; };
 		99543D5625C96F6C00AB5E64 /* Nwconnection+launchMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99543D5525C96F6C00AB5E64 /* Nwconnection+launchMethod.swift */; };
+		99543D5D25C9728900AB5E64 /* String+convertToConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99543D5C25C9728900AB5E64 /* String+convertToConnection.swift */; };
 		9964574F25B8BA8500ECAD15 /* CD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9964574E25B8BA8500ECAD15 /* CD.swift */; };
 		99672E1825B8C1380091D62C /* ftp_tree_test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99672E1725B8C1380091D62C /* ftp_tree_test.swift */; };
 		99672E2025B8C1840091D62C /* ListResutFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99672E1F25B8C1840091D62C /* ListResutFormatterTests.swift */; };
@@ -45,6 +46,7 @@
 		9953252625B60A7A009E6BC5 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		99543D5025C96F1F00AB5E64 /* ClientConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientConnection.swift; sourceTree = "<group>"; };
 		99543D5525C96F6C00AB5E64 /* Nwconnection+launchMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Nwconnection+launchMethod.swift"; sourceTree = "<group>"; };
+		99543D5C25C9728900AB5E64 /* String+convertToConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+convertToConnection.swift"; sourceTree = "<group>"; };
 		9964574E25B8BA8500ECAD15 /* CD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CD.swift; sourceTree = "<group>"; };
 		99672E1525B8C1380091D62C /* ftp-tree-test.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ftp-tree-test.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		99672E1725B8C1380091D62C /* ftp_tree_test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ftp_tree_test.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				99543D5525C96F6C00AB5E64 /* Nwconnection+launchMethod.swift */,
+				99543D5C25C9728900AB5E64 /* String+convertToConnection.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				99672E2F25B8C3E40091D62C /* ListResultFormatter.swift in Sources */,
 				9978749425B60EB5000004D3 /* Passive.swift in Sources */,
 				9978748825B60D51000004D3 /* Command.swift in Sources */,
+				99543D5D25C9728900AB5E64 /* String+convertToConnection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

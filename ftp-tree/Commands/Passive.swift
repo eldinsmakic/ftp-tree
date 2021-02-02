@@ -8,6 +8,9 @@
 import Foundation
 import Network
 
+/**
+ Passive FTP Command
+ */
 class Passive: Command {
     override init(nwConnection: NWConnection) {
         super.init(nwConnection: nwConnection)

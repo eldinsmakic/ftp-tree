@@ -8,6 +8,9 @@
 import Foundation
 import Network
 
+/**
+ CD FTP command
+ */
 class CD: Command {
     var directory: String
 

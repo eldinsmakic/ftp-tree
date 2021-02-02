@@ -8,6 +8,9 @@
 import Foundation
 import Network
 
+/**
+ Pass FTP Command, send password
+ */
 class Pass: Command {
     let password: String
     init(nwConnection: NWConnection, password: String) {

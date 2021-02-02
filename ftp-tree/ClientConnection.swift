@@ -8,6 +8,9 @@
 import Network
 import Foundation
 
+/**
+ Manage connection betweent the client and the endpoint
+ */
 class ClientConnection {
     var host = ""
     let nwConnection: NWConnection
@@ -42,7 +45,7 @@ class ClientConnection {
 
         let response = nwConnection.lauchMethod(command: .Passive)
 
-        let newConnection = convertToConnection(message: response!)
+        let newConnection = response!.convertToConnection(host: host)
 
         self.dataFlowNwConnection = newConnection
         self.dataFlowNwConnection?.start (queue: queue)
@@ -78,24 +81,6 @@ class ClientConnection {
         _ = self.nwConnection.lauchMethod(command: .Cd(".."))
     }
 
-
-    private func convertToConnection(message: String) -> NWConnection {
-        let range = NSRange(location: 0, length: message.count)
-        let regex = try! NSRegularExpression(pattern: "\\(.*\\)")
-        let address = regex.firstMatch(in: message, options: [], range: range)
-
-        var result = message[Range(address!.range, in: message)!]
-        result.removeFirst()
-        result.removeLast()
-
-        let arrayAddress = result.split(separator: ",")
-        var ip = arrayAddress[...3].joined(separator: ".")
-        let port = Int(arrayAddress[4])! * 256 + Int(arrayAddress[5])!
-
-        ip = self.host
-        let nwConnection = NWConnection(host: .init(ip), port: .init(integerLiteral: .init(port)), using: .tcp)
-        return nwConnection
-    }
 
     private func stateDidChange(to state: NWConnection.State) {
         switch state {
