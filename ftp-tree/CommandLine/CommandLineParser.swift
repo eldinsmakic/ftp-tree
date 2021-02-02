@@ -14,6 +14,7 @@ final class CommandLineParser {
     var host: String?
     var username: String?
     var password: String?
+    var deepth: String?
 
     init(arguments: [String], program: Program) {
         self.arguments = arguments
@@ -22,13 +23,15 @@ final class CommandLineParser {
     }
 
     public func lauchCommandLine() {
-        self.program.launch(host: self.host!, username: self.username, password: self.password)
+        guard let host = host else { return }
+
+        self.program.launch(host: host, username: self.username, password: self.password, deepth: self.deepth)
     }
 
     private func parse() {
         if arguments.count < 2 {
             print("Command invalid")
-            self.program.launch(host: "ftp.ubuntu.com", username: "anonymous", password: "anonymous")
+            self.program.launch(host: "ftp.ubuntu.com", username: "anonymous", password: "anonymous", deepth: "1")
         } else {
             for indice in 1..<arguments.count {
                 if arguments[indice] == "-h" {
@@ -37,6 +40,8 @@ final class CommandLineParser {
                     username = arguments[indice+1]
                 } else if arguments[indice] == "-p" {
                     password = arguments[indice+1]
+                } else if arguments[indice] == "-d" {
+                    deepth = arguments[indice+1]
                 }
             }
             lauchCommandLine()
